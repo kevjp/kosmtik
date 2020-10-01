@@ -191,7 +191,7 @@ var realtime = L.realtime(url:'http://0.0.0.0:8000/agents.geojson',
 }).addTo(this);
 
 realtime.on('update', function() {
-    map.fitBounds(realtime.getBounds(), {maxZoom: 22});
+    this.fitBounds(realtime.getBounds(), {maxZoom: 22});
 });
 
 
