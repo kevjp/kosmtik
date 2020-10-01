@@ -168,7 +168,7 @@ L.Kosmtik.Map = L.Map.extend({
 
 });
 
-var realtime = L.realtime(url:'http://0.0.0.0:8000/agents.geojson',
+var realtime = L.realtime('http://0.0.0.0:8000/agents.geojson',
     crossOrigin: true,
     type: 'json',
     {
@@ -193,6 +193,7 @@ var realtime = L.realtime(url:'http://0.0.0.0:8000/agents.geojson',
 realtime.on('update', function() {
     this.fitBounds(realtime.getBounds(), {maxZoom: 22});
 });
+
 
 
 L.Kosmtik.ZoomIndicator = L.Control.extend({
