@@ -168,6 +168,26 @@ L.Kosmtik.Map = L.Map.extend({
 
 });
 
+var realtime = L.realtime('http://0.0.0.0:8000/agents.geojson', {
+    // interval of data refresh (in milliseconds)
+    interval: 10 * 1000,
+    getFeatureId: function(feature) {
+        // required for L.Realtime to track which feature is which
+        // over consecutive data requests.
+        return feature.id;
+    },
+    pointToLayer: function(feature, latlng) {
+        // style the agent loction markers with L.DivIcons
+        var marker = L.marker(latlng, {
+            icon: L.divIcon({
+                className:'agents_icon'
+                })
+            });
+        return marker;
+    }
+}).addTo(this);
+
+
 L.Kosmtik.ZoomIndicator = L.Control.extend({
 
     options: {
