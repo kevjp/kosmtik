@@ -168,7 +168,10 @@ L.Kosmtik.Map = L.Map.extend({
 
 });
 
-var realtime = L.realtime('http://0.0.0.0:8000/agents.geojson', {
+var realtime = L.realtime(url:'http://0.0.0.0:8000/agents.geojson',
+    crossOrigin: true,
+    type: 'json',
+    {
     // interval of data refresh (in milliseconds)
     interval: 10 * 1000,
     getFeatureId: function(feature) {
