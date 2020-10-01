@@ -187,6 +187,10 @@ var realtime = L.realtime('http://0.0.0.0:8000/agents.geojson', {
     }
 }).addTo(this);
 
+realtime.on('update', function() {
+    map.fitBounds(realtime.getBounds(), {maxZoom: 22});
+});
+
 
 L.Kosmtik.ZoomIndicator = L.Control.extend({
 
