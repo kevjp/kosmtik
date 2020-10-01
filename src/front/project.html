@@ -12,7 +12,9 @@
   <script type="text/javascript">
     var map = new L.Kosmtik.Map();
 
-    var realtime = L.realtime('http://0.0.0.0:8000/agents.geojson',
+    var realtime = L.realtime({url: 'http://0.0.0.0:8000/agents.geojson',
+      crossOrigin: true
+    },
     {
     // interval of data refresh (in milliseconds)
     interval: 10 * 1000,
