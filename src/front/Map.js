@@ -174,7 +174,7 @@ var realtime = L.realtime('http://0.0.0.0:8000/agents.geojson', {
     getFeatureId: function(feature) {
         // required for L.Realtime to track which feature is which
         // over consecutive data requests.
-        return feature.id;
+        return feature.properties.id;
     },
     pointToLayer: function(feature, latlng) {
         // style the agent loction markers with L.DivIcons
