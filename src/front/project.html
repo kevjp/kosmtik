@@ -12,7 +12,7 @@
   <script type="text/javascript">
     var map = new L.Kosmtik.Map();
 
-    var realtime = L.realtime({url: 'http://host.docker.internal:8000/agents.geojson',
+    var realtime = L.realtime({url: 'http://192.168.0.101:8000/agents.geojson',
       crossOrigin: true
     },
     {
@@ -21,6 +21,7 @@
     getFeatureId: function(feature) {
         // required for L.Realtime to track which feature is which
         // over consecutive data requests.
+        console.log("here is feature.properties.id:",feature.properties.id);
         return feature.properties.id;
     },
     pointToLayer: function(feature, latlng) {
