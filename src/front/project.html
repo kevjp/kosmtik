@@ -5,6 +5,13 @@
   <title>Kosmtik</title>
   %%JS%%
   %%CSS%%
+  <style>
+    .agents_icon {
+      background: #109856;
+      border: none;
+      opacity: 1.0;
+    }
+  </style>
 </head>
 <body>
   <div id='map' class="sidebar-map"></div>
@@ -28,7 +35,8 @@
         // style the agent loction markers with L.DivIcons
         var marker = L.marker(latlng, {
             icon: L.divIcon({
-                className:'agents_icon'
+                className:'agents_icon',
+                iconSize: [10,10]
                 })
             });
         return marker;
