@@ -12,7 +12,7 @@
   <script type="text/javascript">
     var map = new L.Kosmtik.Map();
 
-    var realtime = L.realtime({url: 'host.docker.internal/agents.geojson',
+    var realtime = L.realtime({url: 'http://host.docker.internal:8000/agents.geojson',
       crossOrigin: true
     },
     {
