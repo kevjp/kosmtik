@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>Kosmtik</title>
+  %%JS%%
+  %%CSS%%
+  <style>
+    .agents_icon {
+      background: #109856;
+      border: none;
+      opacity: 1.0;
+    }
+  </style>
+</head>
+<body>
+  <div id='map' class="sidebar-map"></div>
+
+  <script type="text/javascript">
+    var map = new L.Kosmtik.Map();
+
+    var realtime = L.realtime({url: 'http://192.168.1.229:8000/output.json',
+      crossOrigin: true
+    },
+    {
+    // interval of data refresh (in milliseconds)
+    interval: 1 * 1000,
+    getFeatureId: function(feature) {
+        // required for L.Realtime to track which feature is which
+        // over consecutive data requests.
+        console.log("here is feature.properties.id:",feature.properties.id);
+        return feature.properties.id;
+    },
+    pointToLayer: function(feature, latlng) {
+        // style the agent loction markers with L.DivIcons
+        var marker = L.marker(latlng, {
+            icon: L.divIcon({
+                className:'agents_icon',
+                iconSize: [10,10]
+                })
+            });
+        return marker;
+    }
+    }).addTo(map);
+
+    realtime.on('update', function() {
+        map.fitBounds(realtime.getBounds(), {maxZoom: 22});
+    });
+  </script>
+</body>
+</html>
