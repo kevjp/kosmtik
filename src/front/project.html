@@ -31,7 +31,7 @@
         console.log("here is feature.properties.id:",feature.properties.id);
         return feature.properties.id;
     },
-    pointToLayer: function(feature, latlng) {
+    //pointToLayer: function(feature, latlng) {
         // style the agent loction markers with L.DivIcons
         // var marker = L.marker(latlng, {
         //     icon: L.divIcon({
@@ -40,34 +40,32 @@
         //         })
         //     });
         // return marker;
-        pointToLayer: function(feature, latlng) {
-                if (feature.properties.label === 0) {
-                  return L.circleMarker(latlng, {
-                                        radius: 10,
-                                        fillColor: "blue",
-                                        color: "black"
-                                      });
-                } else if (feature.properties.label === 1) {
-                    return L.circleMarker(latlng, {
-                                        radius: 10,
-                                        fillColor: "green",
-                                        color: "black"
-                                      });
-                } else if (feature.properties.label === 2) {
-                    return L.circleMarker(latlng, {
-                                          radius: 10,
-                                          fillColor: "orange",
-                                          color: "black"
-                                      });
-                } else if (feature.properties.label === 3) {
-                    return L.circleMarker(latlng, {
-                                          radius: 10,
-                                          fillColor: "orange",
-                                          color: "black"
-                                      });
+    pointToLayer: function(feature, latlng) {
+            if (feature.properties.label === 0) {
+              return L.circleMarker(latlng, {
+                                    radius: 10,
+                                    fillColor: "blue",
+                                    color: "black"
+                                  });
+            } else if (feature.properties.label === 1) {
+                return L.circleMarker(latlng, {
+                                    radius: 10,
+                                    fillColor: "green",
+                                    color: "black"
+                                  });
+            } else if (feature.properties.label === 2) {
+                return L.circleMarker(latlng, {
+                                      radius: 10,
+                                      fillColor: "orange",
+                                      color: "black"
+                                  });
+            } else if (feature.properties.label === 3) {
+                return L.circleMarker(latlng, {
+                                      radius: 10,
+                                      fillColor: "orange",
+                                      color: "black"
+                                  });
         }
-
-
     }
     }).addTo(map);
 
