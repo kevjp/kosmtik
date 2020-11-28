@@ -19,6 +19,40 @@
   <script type="text/javascript">
     var map = new L.Kosmtik.Map();
 
+
+    var shipLayer = L.layerGroup();
+    L.Icon.Default.prototype.options.imagePath = '../icons'
+
+    var red = L.icon({
+      iconUrl: 'http://192.168.1.229:8000/icons/red.png',
+      iconSize: [20, 20]
+    });
+    var blue = L.icon({
+      iconUrl: 'http://192.168.1.229:8000/icons/blue.png',
+      iconSize: [20, 20]
+    });
+    var green = L.icon({
+      iconUrl: 'http://192.168.1.229:8000/icons/green.png',
+      iconSize: [20, 20]
+    });
+    var yellow = L.icon({
+      iconUrl: 'http://192.168.1.229:8000/icons/yellow.png',
+      iconSize: [20, 20]
+    });
+    var orange = L.icon({
+      iconUrl: 'http://192.168.1.229:8000/icons/orange.png',
+      iconSize: [20, 20]
+    });
+    var magenta = L.icon({
+      iconUrl: 'http://192.168.1.229:8000/icons/magenta.png',
+      iconSize: [20, 20]
+    });
+    var black = L.icon({
+      iconUrl: 'http://192.168.1.229:8000/icons/black.png',
+      iconSize: [20, 20]
+    });
+
+
     var realtime = L.realtime({url: 'http://192.168.1.229:8000/output.json',
       crossOrigin: true
     },
@@ -29,6 +63,10 @@
         // required for L.Realtime to track which feature is which
         // over consecutive data requests.
         console.log("here is feature.properties.id:",feature.properties.id);
+        var check = L.Icon.Default.prototype._getIconUrl()
+        console.log(check)
+        var loc = window.location.pathname;
+        console.log("current directory:", loc)
         return feature.properties.id;
     },
     //pointToLayer: function(feature, latlng) {
@@ -40,34 +78,72 @@
         //         })
         //     });
         // return marker;
+
+    // pointToLayer: function(feature, latlng) {
+    //         if (feature.properties.label === "0") {
+    //           return L.circleMarker(latlng, {
+    //                                 radius: 10,
+    //                                 fillColor: "blue",
+    //                                 color: "black"
+    //                               });
+    //         } else if (feature.properties.label === "1") {
+    //             return L.circleMarker(latlng, {
+    //                                 radius: 10,
+    //                                 fillColor: "orange",
+    //                                 color: "black"
+    //                               });
+    //         } else if (feature.properties.label === "2") {
+    //             return L.circleMarker(latlng, {
+    //                                   radius: 10,
+    //                                   fillColor: "green",
+    //                                   color: "black"
+    //                               });
+    //         } else if (feature.properties.label === "3") {
+    //             return L.circleMarker(latlng, {
+    //                                   radius: 10,
+    //                                   fillColor: "red",
+    //                                   color: "black"
+    //                               });
+    //         }
+    // },
     pointToLayer: function(feature, latlng) {
-            if (feature.properties.label === "0") {
-              return L.circleMarker(latlng, {
-                                    radius: 10,
-                                    fillColor: "blue",
-                                    color: "black"
-                                  });
-            } else if (feature.properties.label === "1") {
-                return L.circleMarker(latlng, {
-                                    radius: 10,
-                                    fillColor: "orange",
-                                    color: "black"
-                                  });
-            } else if (feature.properties.label === "2") {
-                return L.circleMarker(latlng, {
-                                      radius: 10,
-                                      fillColor: "green",
-                                      color: "black"
-                                  });
-            } else if (feature.properties.label === "3") {
-                return L.circleMarker(latlng, {
-                                      radius: 10,
-                                      fillColor: "red",
-                                      color: "black"
-                                  });
+      // marker = L.circleMarker(latlng, {
+      //                               radius: 10,
+      //                               fillColor: "black",
+      //                               color: "black"
+      //                             });
+      marker = L.marker(latlng);
+        switch(feature.properties.label){
+          case "0": marker.setIcon(red); break;
+          case "1": marker.setIcon(blue); break;
+          case "2": marker.setIcon(green); break;
+          case "3": marker.setIcon(yellow); break;
+          case "4": marker.setIcon(orange); break;
+          case "5": marker.setIcon(magenta); break;
+          default: marker.setIcon(black);
+          }
+          marker.addTo(shipLayer);
+        return marker;
+
+      },
+
+        updateFeature: function(feature, oldLayer, newLayer) {
+          if (!oldLayer) { return; }
+          console.log("oldLayer:",oldLayer)
+            switch(feature.properties.label){
+              case "0": oldLayer.setIcon(red); break;
+              case "1": oldLayer.setIcon(blue); break;
+              case "2": oldLayer.setIcon(green); break;
+              case "3": oldLayer.setIcon(yellow); break;
+              case "4": oldLayer.setIcon(orange); break;
+              case "5": oldLayer.setIcon(magenta); break;
+              default: oldLayer.setIcon(black);
+              }
+        return L.Realtime.prototype.options.updateFeature(feature, oldLayer);
+
         }
-    }
-    }).addTo(map);
+
+      }).addTo(map);
 
     realtime.on('update', function() {
         map.fitBounds(realtime.getBounds(), {maxZoom: 22});
