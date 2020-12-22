@@ -114,8 +114,8 @@
       //                             });
       marker = L.marker(latlng);
         switch(feature.properties.label){
-          case "0": marker.setIcon(red); break;
-          case "1": marker.setIcon(blue); break;
+          case "0": marker.setIcon(blue); break;
+          case "1": marker.setIcon(red); break;
           case "2": marker.setIcon(green); break;
           case "3": marker.setIcon(yellow); break;
           case "4": marker.setIcon(orange); break;
@@ -131,8 +131,8 @@
           if (!oldLayer) { return; }
           console.log("oldLayer:",oldLayer)
             switch(feature.properties.label){
-              case "0": oldLayer.setIcon(red); break;
-              case "1": oldLayer.setIcon(blue); break;
+              case "0": oldLayer.setIcon(blue); break;
+              case "1": oldLayer.setIcon(red); break;
               case "2": oldLayer.setIcon(green); break;
               case "3": oldLayer.setIcon(yellow); break;
               case "4": oldLayer.setIcon(orange); break;
