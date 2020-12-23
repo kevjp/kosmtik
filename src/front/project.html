@@ -113,7 +113,7 @@
       //                               color: "black"
       //                             });
       marker = L.marker(latlng);
-        switch(feature.properties.label){
+        switch(feature.properties.disease_progression){
           case "0": marker.setIcon(blue); break;
           case "1": marker.setIcon(red); break;
           case "2": marker.setIcon(green); break;
@@ -130,7 +130,7 @@
         updateFeature: function(feature, oldLayer, newLayer) {
           if (!oldLayer) { return; }
           console.log("oldLayer:",oldLayer)
-            switch(feature.properties.label){
+            switch(feature.properties.disease_progression){
               case "0": oldLayer.setIcon(blue); break;
               case "1": oldLayer.setIcon(red); break;
               case "2": oldLayer.setIcon(green); break;
